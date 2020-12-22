@@ -20,8 +20,9 @@ public class SelectShop extends IConnectImpl{
 		try {
 			
 			String sql = "SELECT g_idx, goods_name, "
-					+ " trim(to_char(goods_price, '999,999,999')), "
-					+ " regidate, p_code "
+					+ " trim(to_char(goods_price, '999,999,000')), "
+					+ " to_char(regidate, 'yyyy-mm-dd hh:mi'),"
+					+ " p_code "
 					+ " FROM sh_goods "
 					+ " WHERE goods_name like'%"+searchName+"%'";
 			stmt = con.createStatement();
@@ -36,7 +37,7 @@ public class SelectShop extends IConnectImpl{
 				0000-00-00 00:00:00형태로 시간까지 출력할수 있다.
 				만약 문자열을 잘라서 출력하고 싶다면 substring()을 사용한다.
 				 */
-				String regidate =rs.getString("regidate");
+				String regidate = rs.getString(4);
 				String code = rs.getString(5);
 				
 				System.out.printf("일련번호:%d, 상품명:%s,가격:%s, 등록일:%s, 제품코드:%s \n", idx, name, price, regidate, code);
